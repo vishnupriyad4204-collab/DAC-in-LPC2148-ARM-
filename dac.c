@@ -10,7 +10,7 @@ void analogWrite(unsigned int value) {
     DACR = (value & 0x3FF) << 6;   // 10-bit DAC value
 }
 
-// ===== Simple delay (approx 200 µs) =====
+// ===== Simple delay (approx 200 Âµs) =====
 void delay_us(unsigned int us) {
     volatile unsigned int i;
     for (i = 0; i < us * 10; i++);
@@ -25,12 +25,12 @@ int main(void) {
         // Ramp UP (0 ? 1023)
         for (i = 0; i < 1024; i += 20) {  // Changed condition
             analogWrite(i);
-            delay_us(200);
+            delay_us(250);
         }
         
         // Write max value to ensure full swing
         analogWrite(1023);
-        delay_us(200);
+        delay_us(250);
         
         // Ramp DOWN (1023 ? 0)
         for (i = 1003; i >= 0; i -= 20) {  // Changed start and condition
@@ -42,4 +42,5 @@ int main(void) {
         analogWrite(0);
         delay_us(200);
     }
+
 }
